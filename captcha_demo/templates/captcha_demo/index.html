@@ -1,0 +1,38 @@
+{% extends "captcha_demo/base.html" %}
+
+{% block title %}CAPTCHA Demo - Home{% endblock %}
+
+{% block content %}
+<h1>CAPTCHA Demo</h1>
+<p style="text-align: center; margin-bottom: 30px; color: #666;">
+    Django에서 사용할 수 있는 3가지 CAPTCHA 라이브러리를 테스트해보세요.
+</p>
+
+<div class="nav-links">
+    <a href="{% url 'captcha_demo:recaptcha' %}" class="nav-link">
+        <h3>reCAPTCHA v2</h3>
+        <p>django-recaptcha</p>
+        <small style="color: #007bff;">Google</small>
+    </a>
+
+    <a href="{% url 'captcha_demo:hcaptcha' %}" class="nav-link">
+        <h3>hCaptcha</h3>
+        <p>django-hcaptcha</p>
+        <small style="color: #f5a623;">Privacy-focused</small>
+    </a>
+
+    <a href="{% url 'captcha_demo:turnstile' %}" class="nav-link">
+        <h3>Turnstile</h3>
+        <p>django-turnstile</p>
+        <small style="color: #f38020;">Cloudflare</small>
+    </a>
+</div>
+
+<div class="card" style="margin-top: 30px;">
+    <h3 style="margin-bottom: 15px;">Test Keys Info</h3>
+    <p style="font-size: 14px; color: #666;">
+        현재 테스트 키를 사용 중입니다. 테스트 키는 항상 검증을 통과합니다.<br>
+        실제 운영 환경에서는 각 서비스에서 발급받은 키를 사용해야 합니다.
+    </p>
+</div>
+{% endblock %}

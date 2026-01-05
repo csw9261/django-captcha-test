@@ -1,0 +1,60 @@
+{% extends "captcha_demo/base.html" %}
+
+{% block title %}hCaptcha Test{% endblock %}
+
+{% block content %}
+<a href="{% url 'captcha_demo:index' %}" class="back-link">&larr; Back to Home</a>
+
+<h1>hCaptcha</h1>
+<p style="text-align: center; margin-bottom: 30px; color: #666;">
+    django-hcaptcha - 프라이버시 중심 CAPTCHA
+</p>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+<div class="card">
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_username">Username</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="error-list">{{ form.username.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="id_email">Email</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="error-list">{{ form.email.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label>hCaptcha</label>
+            {{ form.captcha }}
+            {% if form.captcha.errors %}
+                <div class="error-list">{{ form.captcha.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3 style="margin-bottom: 10px;">About hCaptcha</h3>
+    <ul style="font-size: 14px; color: #666; padding-left: 20px;">
+        <li>reCAPTCHA의 프라이버시 친화적 대안</li>
+        <li>GDPR 준수</li>
+        <li>Cloudflare 등 대형 서비스에서 채택</li>
+        <li>무료 티어 제공</li>
+    </ul>
+</div>
+{% endblock %}

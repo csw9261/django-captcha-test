@@ -1,0 +1,60 @@
+{% extends "captcha_demo/base.html" %}
+
+{% block title %}reCAPTCHA v2 Test{% endblock %}
+
+{% block content %}
+<a href="{% url 'captcha_demo:index' %}" class="back-link">&larr; Back to Home</a>
+
+<h1>Google reCAPTCHA v2</h1>
+<p style="text-align: center; margin-bottom: 30px; color: #666;">
+    django-recaptcha - Google reCAPTCHA 체크박스
+</p>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+<div class="card">
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_username">Username</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="error-list">{{ form.username.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="id_email">Email</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="error-list">{{ form.email.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label>reCAPTCHA</label>
+            {{ form.captcha }}
+            {% if form.captcha.errors %}
+                <div class="error-list">{{ form.captcha.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3 style="margin-bottom: 10px;">About reCAPTCHA v2</h3>
+    <ul style="font-size: 14px; color: #666; padding-left: 20px;">
+        <li>Google에서 제공하는 CAPTCHA 서비스</li>
+        <li>"I'm not a robot" 체크박스 방식</li>
+        <li>행동 분석 기반 봇 탐지</li>
+        <li>가장 널리 사용되는 CAPTCHA</li>
+    </ul>
+</div>
+{% endblock %}
